@@ -9,11 +9,11 @@ import LoginModal from '@/components/auth/LoginModal'
 const menuItems = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/about' },
-  { name: 'Courses', href: '/courses' },
+  { name: 'Course', href: '/course' },
   { name: 'Research', href: '/research' },
   { name: 'Library', href: '/library' },
   { name: 'Events', href: '/events' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Contact Us', href: '/contact' },
 ]
 
 export default function Navigation() {
@@ -35,10 +35,13 @@ export default function Navigation() {
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-indian-red rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">V</span>
+                <div className="w-12 h-12 bg-indian-red rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-xl font-hindi">ॐ</span>
                 </div>
-                <span className="font-serif text-xl font-bold text-indian-red">VVES</span>
+                <div className="flex flex-col">
+                  <span className="font-serif text-xl font-bold text-indian-red">VVES</span>
+                  <span className="text-xs text-gray-600 font-hindi">वैदिक विज्ञानम्</span>
+                </div>
               </Link>
             </div>
 
@@ -49,7 +52,7 @@ export default function Navigation() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-gray-700 hover:text-indian-red px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                    className="text-gray-700 hover:text-indian-red px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover:bg-indian-red hover:bg-opacity-10"
                   >
                     {item.name}
                   </Link>
@@ -63,17 +66,17 @@ export default function Navigation() {
                 <div className="relative">
                   <button
                     onClick={() => setShowUserMenu(!showUserMenu)}
-                    className="flex items-center space-x-2 text-gray-700 hover:text-indian-red transition-colors duration-200"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-indian-red transition-colors duration-200 p-2 rounded-lg hover:bg-indian-red hover:bg-opacity-10"
                   >
                     <User className="w-5 h-5" />
                     <span className="text-sm font-medium">{user?.username}</span>
                   </button>
                   
                   {showUserMenu && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-200">
                       <Link
                         href="/admin"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indian-red hover:text-white transition-colors"
                         onClick={() => setShowUserMenu(false)}
                       >
                         <Settings className="w-4 h-4 mr-2" />
@@ -81,7 +84,7 @@ export default function Navigation() {
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-indian-red hover:text-white transition-colors"
                       >
                         <LogOut className="w-4 h-4 mr-2" />
                         Logout
@@ -92,8 +95,10 @@ export default function Navigation() {
               ) : (
                 <button
                   onClick={() => setShowLoginModal(true)}
-                  className="btn-primary"
+                  className="btn-primary flex items-center space-x-2"
                 >
+                  <User className="w-4 h-4" />
+                  <span>Login</span>
                   Login
                 </button>
               )}
@@ -119,7 +124,7 @@ export default function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-indian-red block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                  className="text-gray-700 hover:text-indian-red block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 hover:bg-indian-red hover:bg-opacity-10"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -136,7 +141,7 @@ export default function Navigation() {
                     </div>
                     <Link
                       href="/admin"
-                      className="flex items-center px-3 py-2 text-gray-700 hover:text-indian-red"
+                      className="flex items-center px-3 py-2 text-gray-700 hover:text-indian-red transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       <Settings className="w-5 h-5 mr-2" />
@@ -147,7 +152,7 @@ export default function Navigation() {
                         handleLogout()
                         setIsOpen(false)
                       }}
-                      className="flex items-center w-full px-3 py-2 text-gray-700 hover:text-indian-red"
+                      className="flex items-center w-full px-3 py-2 text-gray-700 hover:text-indian-red transition-colors"
                     >
                       <LogOut className="w-5 h-5 mr-2" />
                       Logout
@@ -159,8 +164,10 @@ export default function Navigation() {
                       setShowLoginModal(true)
                       setIsOpen(false)
                     }}
-                    className="btn-primary w-full"
+                    className="btn-primary w-full flex items-center justify-center space-x-2"
                   >
+                    <User className="w-4 h-4" />
+                    <span>Login</span>
                     Login
                   </button>
                 )}

@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_Devanagari, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { Toaster } from 'react-hot-toast'
+import Script from 'next/script'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -21,15 +22,21 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   title: 'Vedic Vigyanam Explorer Society (VVES)',
-  description: 'Leading authority in preservation and interpretation of Vedic Science',
-  keywords: 'Vedic Science, Ancient Knowledge, Research, Education, Sanskrit',
+  description: 'Leading authority in the preservation and interpretation of Vedic Science, integrating ancient wisdom into modern academic and cultural frameworks',
+  keywords: 'Vedic Science, Ancient Knowledge, Research, Education, Sanskrit, Vimaan Shastra, Bharadwaj, Ayurveda, Vedic Mathematics',
   authors: [{ name: 'VVES Team' }],
+  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: 'Vedic Vigyanam Explorer Society (VVES)',
-    description: 'Leading authority in preservation and interpretation of Vedic Science',
+    description: 'Leading authority in the preservation and interpretation of Vedic Science',
     type: 'website',
     locale: 'en_IN',
+    siteName: 'VVES',
   },
+  robots: 'index, follow',
+  alternates: {
+    canonical: 'https://vves.org'
+  }
 }
 
 export default function RootLayout({
@@ -39,7 +46,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSansDevanagari.variable} ${playfairDisplay.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#7f1d1d" />
+      </head>
       <body className="font-sans antialiased">
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'GA_MEASUREMENT_ID');
+          `}
+        </Script>
+        
         <AuthProvider>
           {children}
           <Toaster 
